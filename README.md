@@ -6,11 +6,13 @@
 ##### Task 목적 : 회귀모델을 활용해 우승자를 예상해야 함 <br/> Preprocessing(EDA) -> Feature Engineering -> Modeling(Hyper-parameter Tuning) -> Submission <br/>My part : 모든 과정 참여 <br/>Team : 5명
 
 #### 개인 목적 : VIF 와 Feature Importance 에 대한 이해
-
+<br/><br/>
 ## Preprocessing
-  * 결측치 처리 
-  * Feature 별 분석
-  
+<img src="https://user-images.githubusercontent.com/103080228/201855833-a35b3c13-0c89-4ded-a3ef-4a7393c016ab.jpg"  width="600" height="300">
+
+* 결측치 처리 
+* Feature 별 분석
+<br/><br/>  
 ## Feature Engineering
   * corr() 를 통한 sns.heatmap 으로 전체적인 상관관계 파악 <br/>--> 이때 target과의 상관관계를 살펴보아야함
     * walkDistance > boosts > weaponsAcquired > damageDealt > heals > kills > longestKill <br/>-->label(target)인 winPlacePerc와 상관관계가 높음(이들 feature들을 분석)
@@ -40,7 +42,8 @@
 ##### 참고 : https://han-py.tistory.com/343
 <br/>
 <br/><br/>
-  * Feature Importance code
+
+* Feature Importance code
 		
     ```important_features = find_feature_importance(trainX, model, show_plot) ```
 				
@@ -61,4 +64,6 @@
 * GINI INDEX
   * 지니계수는 통계적 분산 정도를 정량화해서 표현한 값, 0과 1사이의 값을 가짐 <br/> 지니계수가 높을 수록 잘 분류되지 못한 것
 * 트리들을 샘플도, 변수들도 랜덤으로 뽑아서 생성한 것을 몇백개 이상 합쳐서 얻은<br/> 변수 중요도는 충분히 신뢰할 만한 것.<br/>하지만 'scikit-learn의 디폴트 랜덤 포레스트 Feature Importance는 다소 biased하다’고 합니다.<br/>특히, 랜덤 포레스트는 연속형 변수 또는 카테고리 개수가 매우 많은 변수,<br/> 즉 ‘high cardinality’ 변수들의 중요도를 더욱 부풀릴 가능성이 높다고 합니다. <br/>왜 이런 결과가 나오는지는 정확히 알 수 없으나, cardinality가 큰 변수일 수록, <br/>노드를 쨀 게 훨씬 더 많아서 노드 중요도 값이 높게 나오는 게 아닐까 싶습니다. <br/>(출처 : https://soohee410.github.io/iml_tree_importance)
+<br/>
 
+## Modeling
