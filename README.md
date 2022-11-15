@@ -3,13 +3,15 @@
 
 # PUBG_project
 
-##### Task 목적 : 회귀모델을 활용해 우승자를 예상해야 함 <br/> EDA -> Preprocessing -> Feature Engineering -> 학습 -> Hyper-parameter Tuning -> Submission <br/>My part : 모든 과정 참여 <br/>Team : 5명
+##### Task 목적 : 회귀모델을 활용해 우승자를 예상해야 함 <br/> Preprocessing(EDA) -> Feature Engineering -> Modeling(Hyper-parameter Tuning) -> Submission <br/>My part : 모든 과정 참여 <br/>Team : 5명
 
 #### 개인 목적 : VIF 와 Feature Importance 에 대한 이해
 
-## EDA
+## Preprocessing
   * 결측치 처리 
   * Feature 별 분석
+  
+## Feature Engineering
   * corr() 를 통한 sns.heatmap 으로 전체적인 상관관계 파악 <br/>--> 이때 target과의 상관관계를 살펴보아야함
     * walkDistance > boosts > weaponsAcquired > damageDealt > heals > kills > longestKill <br/>-->label(target)인 winPlacePerc와 상관관계가 높음(이들 feature들을 분석)
     * 상관관계 분석, VIF 분석, RF의 feature_importance, LGBM의 feature_importance, PCA등 <br/>다양한 feature 분석 툴들을 통해 공통의 feature를 추출하는 것을 고려해봄
@@ -37,14 +39,26 @@
 ##### 독립변수의 유의 확률로 보통은 독립변수가 95%의 신뢰도를 가져야 유의미하다 판단하고 유의 확률은 0.05보다 작은 값이 산출된다. <br/>즉, 0.05보다 작으면 독립 변수가 종속 변수에 영향을 미치는 것이 유의미하다고 보면 된다.<br/>p-value(유의 확률, significance probability)는 '귀무가설(Null hypothesis)이 맞는다고 가정할 때 <br/>얻은 결과보다 극단적인 결과(관측 결과)가 나타날 확률'로 정의됩니다. <br/>보통 p-value < 0.05 이면, 신뢰할 수 있습니다.
 ##### 참고 : https://han-py.tistory.com/343
 <br/>
-
+<br/><br/>
   * Feature Importance code
-    ```
-    show_plot = True
-    model = RandomForestRegressor(max_features="sqrt", n_jobs=-1, random_state=0xC0FFEE)
-    model.fit(trainX, y)
-    important_features = find_feature_importance(trainX, model, show_plot)
-    X = trainX[important_features]
-    print(X.shape)```
-    
-   * Feature Importance graph
+		
+    ```important_features = find_feature_importance(trainX, model, show_plot) ```
+				
+		
+* Feature Importance graph
+<img src="https://user-images.githubusercontent.com/103080228/201831156-b39d4319-03e9-45dc-8963-a50f8485cee6.jpg"  width="600" height="300">
+<br/>
+---- Feature Importance 는 믿을 수 있을까?
+<br/><br/>
+
+* CART (Classification and Regression Tree)
+  * 노드가 2개의 child 노드를 가지는 binary tree를, 불순도(impurity) 지표를 기준으로 생성해 나가는 알고리즘
+  * 목적이 분류(Classification)일 때에는 불순도 지표로 Gini 계수 및 엔트로피를 이용
+  * 목적이 회귀(Regression)일 때에는 MSE(Mean Square Error) 등을 이용<br/>--> 분산을 감소시키는 방향으로 노드를 형성<br/> 이 과정에서, 불순도를 가장 크게 감소시키는 변수의 중요도가 가장 크게 됩니다.<br/> CART 알고리즘은 바로 이 불순도를 이용해서 가장 중요한 변수들을 찾아냅니다.
+
+* 불순도
+  * 클래스가 섞이지 않고 분류가 잘 되었을 수록, 불순도가 낮음 <br/>반면 클래스가 섞여 있고, 반반인 경우에는, 불순도가 높음 <br/>의사결정나무 모델은 이 불순도가 낮아지는 방향으로 학습을 함
+* GINI INDEX
+  * 지니계수는 통계적 분산 정도를 정량화해서 표현한 값, 0과 1사이의 값을 가짐 <br/> 지니계수가 높을 수록 잘 분류되지 못한 것
+* 트리들을 샘플도, 변수들도 랜덤으로 뽑아서 생성한 것을 몇백개 이상 합쳐서 얻은<br/> 변수 중요도는 충분히 신뢰할 만한 것.<br/>하지만 'scikit-learn의 디폴트 랜덤 포레스트 Feature Importance는 다소 biased하다’고 합니다.<br/>특히, 랜덤 포레스트는 연속형 변수 또는 카테고리 개수가 매우 많은 변수,<br/> 즉 ‘high cardinality’ 변수들의 중요도를 더욱 부풀릴 가능성이 높다고 합니다. <br/>왜 이런 결과가 나오는지는 정확히 알 수 없으나, cardinality가 큰 변수일 수록, <br/>노드를 쨀 게 훨씬 더 많아서 노드 중요도 값이 높게 나오는 게 아닐까 싶습니다. <br/>(출처 : https://soohee410.github.io/iml_tree_importance)
+
