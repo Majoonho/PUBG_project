@@ -15,7 +15,9 @@
     * 다중공선성이란 ? 독립 변수 X는 종속 변수 Y(target) 하고만 상관 관계가 있어야 하는데,<br/> 독립 변수끼리 상관 관계를 보이는 것
     * ```from statsmodels.stats.outliers_influence import ariance_inflation_factor```
     * 보통 VIF 점수가 10점 이상이면, 상관관계가 있다고 해석할 수 있음
-![image](https://user-images.githubusercontent.com/103080228/201831212-92e6c7a1-986c-4ccc-a11e-7acf9fe5cf94.png)
-
-
+    <br/>
+ 
+<img src="https://user-images.githubusercontent.com/103080228/201831212-92e6c7a1-986c-4ccc-a11e-7acf9fe5cf94.png"  width="700" height="350">
+<br/>
+ 
 
