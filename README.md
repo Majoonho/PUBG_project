@@ -5,7 +5,7 @@
 
 ##### Task 목적 : 회귀모델을 활용해 우승자를 예상해야 함 <br/> Preprocessing(EDA) -> Feature Engineering -> Modeling(Hyper-parameter Tuning) -> Submission <br/>My part : 모든 과정 참여 <br/>Team : 5명
 
-#### 개인 목적 : VIF 와 Feature Importance 에 대한 이해
+#### 개인 목적 : <br/>VIF 와 Feature Importance 에 대한 이해<br/>optuna 와 k-fold 실습
 <br/><br/>
 ## Preprocessing
 <img src="https://user-images.githubusercontent.com/103080228/201855833-a35b3c13-0c89-4ded-a3ef-4a7393c016ab.jpg"  width="600" height="300">
@@ -60,7 +60,7 @@
   * 클래스가 섞이지 않고 분류가 잘 되었을 수록, 불순도가 낮음 <br/>반면 클래스가 섞여 있고, 반반인 경우에는, 불순도가 높음 <br/>의사결정나무 모델은 이 불순도가 낮아지는 방향으로 학습을 함
 * GINI INDEX
   * 지니계수는 통계적 분산 정도를 정량화해서 표현한 값, 0과 1사이의 값을 가짐 <br/> 지니계수가 높을 수록 잘 분류되지 못한 것
-* 트리들을 샘플도, 변수들도 랜덤으로 뽑아서 생성한 것을 몇백개 이상 합쳐서 얻은<br/> 변수 중요도는 충분히 신뢰할 만한 것.<br/>하지만 'scikit-learn의 디폴트 랜덤 포레스트 Feature Importance는 다소 biased하다’고 합니다.<br/>특히, 랜덤 포레스트는 연속형 변수 또는 카테고리 개수가 매우 많은 변수,<br/> 즉 ‘high cardinality’ 변수들의 중요도를 더욱 부풀릴 가능성이 높다고 합니다. <br/>왜 이런 결과가 나오는지는 정확히 알 수 없으나, cardinality가 큰 변수일 수록, <br/>노드를 쨀 게 훨씬 더 많아서 노드 중요도 값이 높게 나오는 게 아닐까 싶습니다. <br/>(출처 : https://soohee410.github.io/iml_tree_importance)
+* 트리들을 샘플, 변수들로 랜덤으로 뽑아서 생성한 것을 몇백개 이상 합쳐서 얻은<br/> 변수 중요도는 충분히 신뢰할 만한 것.<br/>하지만 'scikit-learn의 디폴트 랜덤 포레스트 Feature Importance는 다소 biased하다’고 합니다.<br/>특히, 랜덤 포레스트는 연속형 변수 또는 카테고리 개수가 매우 많은 변수,<br/> 즉 ‘high cardinality’ 변수들의 중요도를 더욱 부풀릴 가능성이 높다고 합니다. <br/>왜 이런 결과가 나오는지는 정확히 알 수 없으나, cardinality가 큰 변수일 수록, <br/>노드를 쨀 게 훨씬 더 많아서 노드 중요도 값이 높게 나오는 게 아닐까 싶습니다. <br/>(출처 : https://soohee410.github.io/iml_tree_importance)
 <br/>
 
 ## Modeling
@@ -86,13 +86,16 @@ learning_rate = trial.suggest_loguniform('learning_rate' : 1e-6, 1e-3)<br/>
 	* 하이퍼파라미터 최적화 과정 확인 : optuna.visualization.plot_optimization(study)<br/>(출처 : https://ssoonidev.tistory.com/107)
 
 * K-fold cross validation
-<img src="https://user-images.githubusercontent.com/103080228/201866682-2701c772-8082-4fe6-a5f1-387c8254ef5a.png"  width="600" height="300"><br/>(출처 : https://bbdata.tistory.com/10)
-
 	* k개로 나눈 데이터셋을 테스트셋을 바꿔가며 성능을 평가하는 방식입니다.
 	* K개의 결과물이 나오고, 그것의 평균값이 k-fold 교차 검증 방식을 활용한 모델의 성능이 됩니다.
 	* K값은 보통 5 또는 10으로 설정하는 경우가 많습니다.
+<img src="https://user-images.githubusercontent.com/103080228/201866682-2701c772-8082-4fe6-a5f1-387c8254ef5a.png"  width="600" height="300"><br/>(출처 : https://bbdata.tistory.com/10)
 <br/>
 
-## Modeling
+## result
 <img src="https://user-images.githubusercontent.com/103080228/201857462-06925683-3568-4bf6-8a5f-c587c77b6cb7.jpg"  width="600" height="300"><br/>
+* optuna 도 모델별로 hyperparameter 설정하는 것이 달라서 찾아보는데 시간이 오래걸렸습니다.
+* parameter 종류가 다양해서, 이해하기에 어려운 부분이 많습니다.
+* 앞으로 관련 공부를 할 때마다 parameter 에 대한 이해를 조금씩 해가는 것이 중요합니다.
+
 
