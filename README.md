@@ -68,24 +68,21 @@
 
 * Hyper-parameter Tuning using Optuna
 
-Optuna는 하이퍼파라미터 최적화 태스크를 도와주는 프레임워크입니다.	
-파라미터의 범위를 지정해주거나, 파라미터가 될 수 있는 목록을 설정하면 매 Trial 마다 파라미터를 변경하면서, 최적의 파라미터를 찾습니다.
+	* Optuna는 하이퍼파라미터 최적화 태스크를 도와주는 프레임워크입니다.<br/>파라미터의 범위를 지정해주거나, 파라미터가 될 수 있는 목록을 설정하면 매 Trial 마다 <br/>파라미터를 변경하면서, 최적의 파라미터를 찾습니다.<br/><br/>
+-- suggest_int : 범위 내의 정수형 값을 선택합니다.<br/>
+n_estimator = trial.suggest_int('n_estimator', 100, 500)<br/><br/>
+-- suggest_categorical : List 내의 데이터 중 선택을 합니다.<br/>
+criterion = trial.suggest_categorical('criterion', ['gini', 'entropy']<br/><br/>
+-- suggest_uniform : 범위 내의 균일 분포를 값으로 선택합니다.<br/>
+subsample = trial.suggest_uniform('subsample', 0.2,0.8)<br/><br/>
+-- suggest_discrete_uniform : 범위 내의 이산 균등 분포를 값으로 선택합니다.<br/>
+max_faatures = trial.suggest_discrete_uniform('max_features', 0.05,1,0.05)<br/><br/>
+-- suggest_loguniform : 범위 내의 로그 함수 선상의 값을 선택합니다.<br/>
+learning_rate = trial.suggest_loguniform('learning_rate' : 1e-6, 1e-3)<br/>
 
--- suggest_int : 범위 내의 정수형 값을 선택합니다.
-n_estimator = trial.suggest_int('n_estimator', 100, 500)
--- suggest_categorical : List 내의 데이터 중 선택을 합니다.
-criterion = trial.suggest_categorical('criterion', ['gini', 'entropy']
--- suggest_uniform : 범위 내의 균일 분포를 값으로 선택합니다.
-subsample = trial.suggest_uniform('subsample', 0.2,0.8)
--- suggest_discrete_uniform : 범위 내의 이산 균등 분포를 값으로 선택합니다.
-max_faatures = trial.suggest_discrete_uniform('max_features', 0.05,1,0.05)
--- suggest_loguniform : 범위 내의 로그 함수 선상의 값을 선택합니다.
-learning_rate = trial.suggest_loguniform('learning_rate' : 1e-6, 1e-3)
+* optuna 시각화툴
 
-optuna 시각화툴
-하이퍼파라미터별 중요도 확인
-optuna.visualization.plot_importances(study)
-하이퍼파라미터 최적화 과정 확인
-optuna.visualization.plot_optimization(study)
+	* 하이퍼파라미터별 중요도 확인 : optuna.visualization.plot_importances(study)
+	* 하이퍼파라미터 최적화 과정 확인 : optuna.visualization.plot_optimization(study)<br/>(출처 : https://ssoonidev.tistory.com/107)
 
-(출처 : https://ssoonidev.tistory.com/107)
+* K-fold cross validation
