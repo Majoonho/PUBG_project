@@ -43,12 +43,9 @@
 <br/>
 <br/><br/>
 
-* Feature Importance code
-		
-    ```important_features = find_feature_importance(trainX, model, show_plot) ```
 				
 		
-* Feature Importance graph
+* Feature Importance
 <img src="https://user-images.githubusercontent.com/103080228/201831156-b39d4319-03e9-45dc-8963-a50f8485cee6.jpg"  width="600" height="300">
 <br/>
 ---- Feature Importance 는 믿을 수 있을까?
@@ -67,3 +64,28 @@
 <br/>
 
 ## Modeling
+<img src="https://user-images.githubusercontent.com/103080228/201857154-a78cce20-bc05-4fd4-83b4-6abe78b915f7.jpg"  width="600" height="300"><br/>
+
+* Hyper-parameter Tuning using Optuna
+
+Optuna는 하이퍼파라미터 최적화 태스크를 도와주는 프레임워크입니다.	
+파라미터의 범위를 지정해주거나, 파라미터가 될 수 있는 목록을 설정하면 매 Trial 마다 파라미터를 변경하면서, 최적의 파라미터를 찾습니다.
+
+-- suggest_int : 범위 내의 정수형 값을 선택합니다.
+n_estimator = trial.suggest_int('n_estimator', 100, 500)
+-- suggest_categorical : List 내의 데이터 중 선택을 합니다.
+criterion = trial.suggest_categorical('criterion', ['gini', 'entropy']
+-- suggest_uniform : 범위 내의 균일 분포를 값으로 선택합니다.
+subsample = trial.suggest_uniform('subsample', 0.2,0.8)
+-- suggest_discrete_uniform : 범위 내의 이산 균등 분포를 값으로 선택합니다.
+max_faatures = trial.suggest_discrete_uniform('max_features', 0.05,1,0.05)
+-- suggest_loguniform : 범위 내의 로그 함수 선상의 값을 선택합니다.
+learning_rate = trial.suggest_loguniform('learning_rate' : 1e-6, 1e-3)
+
+optuna 시각화툴
+하이퍼파라미터별 중요도 확인
+optuna.visualization.plot_importances(study)
+하이퍼파라미터 최적화 과정 확인
+optuna.visualization.plot_optimization(study)
+
+(출처 : https://ssoonidev.tistory.com/107)
