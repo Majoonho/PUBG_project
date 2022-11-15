@@ -86,3 +86,13 @@ learning_rate = trial.suggest_loguniform('learning_rate' : 1e-6, 1e-3)<br/>
 	* 하이퍼파라미터 최적화 과정 확인 : optuna.visualization.plot_optimization(study)<br/>(출처 : https://ssoonidev.tistory.com/107)
 
 * K-fold cross validation
+<img src="https://user-images.githubusercontent.com/103080228/201866682-2701c772-8082-4fe6-a5f1-387c8254ef5a.png"  width="600" height="300"><br/>(출처 : https://bbdata.tistory.com/10)
+
+	* k개로 나눈 데이터셋을 테스트셋을 바꿔가며 성능을 평가하는 방식입니다.
+	* K개의 결과물이 나오고, 그것의 평균값이 k-fold 교차 검증 방식을 활용한 모델의 성능이 됩니다.
+	* K값은 보통 5 또는 10으로 설정하는 경우가 많습니다.
+<br/>
+
+## Modeling
+<img src="https://user-images.githubusercontent.com/103080228/201857462-06925683-3568-4bf6-8a5f-c587c77b6cb7.jpg"  width="600" height="300"><br/>
+
