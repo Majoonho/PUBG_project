@@ -19,11 +19,11 @@
     * 보통 VIF 점수가 10점 이상이면, 상관관계가 있다고 해석할 수 있음
     <br/>
  
-<img src="https://user-images.githubusercontent.com/103080228/201831212-92e6c7a1-986c-4ccc-a11e-7acf9fe5cf94.png"  width="700" height="350">
+<img src="https://user-images.githubusercontent.com/103080228/201831212-92e6c7a1-986c-4ccc-a11e-7acf9fe5cf94.png"  width="450" height="300"> <img src="https://user-images.githubusercontent.com/103080228/201832677-1e32944f-8500-46cd-86d0-789ea2a4d0d5.png"  width="300" height="300">
 <br/>
 
 
-
+R-squared
 모형이 데이터에 잘 맞는 정도를 보여주는 지표중 하나이다. R 제곱이라는 뜻으로 위의 데이터에는 0.603으로 표현되는 것을 알 수 있다. 쉽게 말하면 얼마나 선형적인가(a = B0 + B1 * weight)를 표현한 수치라고 할 수 있다. 범위는 0에서 1 사이의 값으로 0이면 모델의 설명력이 전혀 없는 상태이고, 1에 가까울수록 모델이 데이터를 잘 성명해 주는 상태라고 할 수 있다. 보통은 0.4 이상이면 괜찮은 모델이라 할 수 있다.
 
  
